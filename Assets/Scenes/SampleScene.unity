@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 1309895619}
   - component: {fileID: 1309895618}
   - component: {fileID: 1309895622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DrawSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,5 +447,7 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   mask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   drawer: {fileID: 745314370}
+  cubeDistance: 0.1
+  drawStart: {x: 0, y: 0, z: 0}
