@@ -15,7 +15,8 @@ public class DrawSurface : MonoBehaviour
     public float cubeDistance = .1f;
     public Vector3 drawStart;
 
-
+    public Transform drawSurfaceBottom;
+    public Transform trackSurfaceBottom;
 
 
     private void Awake()
@@ -35,6 +36,7 @@ public class DrawSurface : MonoBehaviour
             Wheel w = Pool.Get<Wheel>();
             w.transform.position = hits[0].point;
             w.transform.localScale = Vector3.one * gameSettings.wheelRadius;
+            w.transform.SetParent(drawSurfaceBottom);
             drawStart = hits[0].point;
         }
         else if (Input.GetMouseButton(0))
@@ -42,7 +44,12 @@ public class DrawSurface : MonoBehaviour
             //Draw Intermediate Parts
             if(Vector3.Distance(drawStart, hits[0].point) > cubeDistance)
             {
-                DrawCube(drawStart, hits[0].point, .1f, Vector3.up);
+
+                Cube c = Pool.Get<Cube>();
+                c.transform.position = drawStart;
+                c.transform.localScale = new Vector3(.1f, .1f, Vector3.Distance(drawStart, hits[0].point));
+                c.transform.LookAt(hits[0].point, Vector3.up);
+
                 drawStart = hits[0].point;
             }
 
@@ -54,12 +61,15 @@ public class DrawSurface : MonoBehaviour
             w.transform.position = hits[0].point;
             w.transform.localScale = Vector3.one * gameSettings.wheelRadius;
 
-            DrawCube(drawStart, hits[0].point, .1f, Vector3.up);
+            Cube c = Pool.Get<Cube>();
+            c.transform.position = drawStart;
+            c.transform.localScale = new Vector3(.1f, .1f, Vector3.Distance(drawStart, hits[0].point));
+            c.transform.LookAt(hits[0].point, Vector3.up);
 
             //TODO put car to the track
 
-            
-            
+
+
         }
 
 
@@ -69,7 +79,6 @@ public class DrawSurface : MonoBehaviour
     public void DrawCube(Vector3 pos1, Vector3 pos2, float thiccnes, Vector3 up)
     {
         GameObject go = Pool.Get<Cube>().gameObject;
-
         go.transform.position = pos1;
         go.transform.localScale = new Vector3(thiccnes, thiccnes, Vector3.Distance(pos1, pos2));
         go.transform.LookAt(pos2, up);
