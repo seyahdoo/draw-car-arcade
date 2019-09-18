@@ -15,6 +15,9 @@ public class DrawSurface : MonoBehaviour
     public float cubeDistance = .1f;
     public Vector3 drawStart;
 
+
+
+
     private void Awake()
     {
         Pool.CreatePool<Wheel>(null, 4, 10);
@@ -55,6 +58,8 @@ public class DrawSurface : MonoBehaviour
 
             //TODO put car to the track
 
+            
+            
         }
 
 
